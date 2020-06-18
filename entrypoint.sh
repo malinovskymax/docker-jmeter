@@ -5,18 +5,34 @@
 # This script expects the standdard JMeter command parameters.
 #
 set -e
-freeMem=`awk '/MemFree/ { print int($2/1024) }' /proc/meminfo`
-s=$(($freeMem/10*8))
-x=$(($freeMem/10*8))
-n=$(($freeMem/10*2))
-export JVM_ARGS="-Xmn${n}m -Xms${s}m -Xmx${x}m"
+#freeMem=`awk '/MemFree/ { print int($2/1024) }' /proc/meminfo`
+#s=$(($freeMem/10*8))
+#x=$(($freeMem/10*8))
+#n=$(($freeMem/10*2))
+#export JVM_ARGS="-Xmn${n}m -Xms${s}m -Xmx${x}m"
 
 echo "START Running Jmeter on `date`"
-echo "JVM_ARGS=${JVM_ARGS}"
+#echo "JVM_ARGS=${JVM_ARGS}"
 echo "jmeter args=$@"
 
 # Keep entrypoint simple: we must pass the standard JMeter arguments
-jmeter $@
+#jmeter $@
+
+case $1 in
+    client)
+        tail -f /dev/null
+        ;;
+    server)
+        cd $JMETER_HOME/bin/
+        ./jmeter-server \
+            -Dserver.rmi.localport=50000 \
+            -Dserver_port=1099
+        ;;
+    *)
+        echo "Sorry, this option doesn't exist!"
+        ;;
+esac
+
 echo "END Running Jmeter on `date`"
 
 #     -n \

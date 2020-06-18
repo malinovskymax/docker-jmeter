@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.1.1 r1855137">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding">UTF-8</stringProp>
+        <stringProp name="filename">/tests/chime/local_enrolled_users.csv</stringProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">user_id, app_version, api_version, auth_token, prn</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - AWS loadtest" enabled="false">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="consumer_protocol" elementType="Argument">
+            <stringProp name="Argument.name">consumer_protocol</stringProp>
+            <stringProp name="Argument.value">https</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="consumer_host" elementType="Argument">
+            <stringProp name="Argument.name">consumer_host</stringProp>
+            <stringProp name="Argument.value">consumer.loadtest.qa.chmfin.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="api_protocol" elementType="Argument">
+            <stringProp name="Argument.name">api_protocol</stringProp>
+            <stringProp name="Argument.value">https</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="api_host" elementType="Argument">
+            <stringProp name="Argument.name">api_host</stringProp>
+            <stringProp name="Argument.value">api.loadtest.qa.chmfin.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Local Env" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="consumer_host" elementType="Argument">
+            <stringProp name="Argument.name">consumer_host</stringProp>
+            <stringProp name="Argument.value">consumer.chm.life</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="consumer_protocol" elementType="Argument">
+            <stringProp name="Argument.name">consumer_protocol</stringProp>
+            <stringProp name="Argument.value">http</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="api_host" elementType="Argument">
+            <stringProp name="Argument.name">api_host</stringProp>
+            <stringProp name="Argument.value">api.chm.life</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="api_protocol" elementType="Argument">
+            <stringProp name="Argument.name">api_protocol</stringProp>
+            <stringProp name="Argument.value">http</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+      </CookieManager>
+      <hashTree/>
+      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+        <boolProp name="clearEachIteration">false</boolProp>
+        <boolProp name="useExpires">true</boolProp>
+      </CacheManager>
+      <hashTree/>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="Accept-Language" elementType="Header">
+            <stringProp name="Header.name">Accept-Language</stringProp>
+            <stringProp name="Header.value">en-us</stringProp>
+          </elementProp>
+          <elementProp name="User-Agent" elementType="Header">
+            <stringProp name="Header.name">User-Agent</stringProp>
+            <stringProp name="Header.value">${user_agent}</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">origin</stringProp>
+            <stringProp name="Header.value">${consumer_protocol}://${consumer_host}</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Homepage Load" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">stopthread</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(threads,1)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(rampup,1)}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(duration,10)}</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="GET" enabled="true"/>
+        <hashTree>
+          <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="app_version" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${app_version}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">app_version</stringProp>
+                </elementProp>
+                <elementProp name="api_version" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${api_version}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">api_version</stringProp>
+                </elementProp>
+                <elementProp name="auth_token" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${auth_token}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">auth_token</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${consumer_host}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">${consumer_protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path"></stringProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </ConfigTestElement>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET - foreground.json" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">users/${user_id}/foreground.json</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="foreground Assertion" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage +=&apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!true.equals(jsonResponse.success)){
+	failureMessage += &apos;$.success = &apos; + jsonResponse.success + &apos;.\n&apos;
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}
+
+
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET - configs/messaging" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">users/${user_id}/configs/messaging.json</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="configs/messagin Assertion" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage +=&apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!true.equals(jsonResponse.success)){
+	failureMessage += &apos;$.success = &apos; + jsonResponse.success + &apos;.\n&apos;
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET - refer_a_freind.json" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">users/${user_id}/configs/refer_a_friend.json</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="refer_a_freind Assertion" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage +=&apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!true.equals(jsonResponse.success)){
+	failureMessage += &apos;$.success = &apos; + jsonResponse.success + &apos;.\n&apos;
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET - home_coordinates.json" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">users/${user_id}/home_coordinates.json</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="home_coordinates Assertion" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage +=&apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!true.equals(jsonResponse.success)){
+	failureMessage += &apos;$.success = &apos; + jsonResponse.success + &apos;.\n&apos;
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET - user_contacts.json" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="component" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">pay_friends</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">component</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">users/${user_id}/user_contacts.json</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="user_contacts Assertion" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage +=&apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!true.equals(jsonResponse.success)){
+	failureMessage += &apos;$.success = &apos; + jsonResponse.success + &apos;.\n&apos;
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET - widgets.json " enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">users/${user_id}/widgets.json</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="widgets Assertion" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage +=&apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!true.equals(jsonResponse.success)){
+	failureMessage += &apos;$.success = &apos; + jsonResponse.success + &apos;.\n&apos;
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET - linked_accounts.json" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${consumer_host}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">${consumer_protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">users/${user_id}/linked_accounts.json</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="linked_accounts Assertion" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage +=&apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!true.equals(jsonResponse.success)){
+	failureMessage += &apos;$.success = &apos; + jsonResponse.success + &apos;.\n&apos;
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET - accounts_summary.json" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${consumer_host}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">${consumer_protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">users/${user_id}/accounts_summary.json</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="accounts_summary Assertion" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage +=&apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!true.equals(jsonResponse.success)){
+	failureMessage += &apos;$.success = &apos; + jsonResponse.success + &apos;.\n&apos;
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="POST" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST - HomeMasterQuery" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;operationName&quot;: &quot;HomeMasterQuery&quot;,&#xd;
+  &quot;query&quot;: &quot;query HomeMasterQuery($withAccountDetails: Boolean!) {\n  user: me {\n    ...AccountDetailsWidgetUser @include(if: $withAccountDetails)\n    ...HomeListTopWidgetWrapper\n    ...DialogWrapperFragment\n    ...HighYieldSavingsAccountFragment\n    __typename\n  }\n  savings_config {\n    ...SavingsAccountDetailsSavingsConfigFragment\n    ...HighYieldSavingsWidgetFragment\n    ...DialogWrapperSavingsConfigFragment\n    __typename\n  }\n  ...UnreadMessagesFragment\n  ...ClickSwitchEligibilityFragment\n}\n\nfragment SavingsAccountDetailsSavingsConfigFragment on SavingsConfig {\n  apy\n  savings_balance_widget_copy\n  __typename\n}\n\nfragment AccountDetailsWidgetUser on User {\n  bank_accounts {\n    id\n    account_type\n    ...AccountBalanceFragment\n    __typename\n  }\n  ...CreditDetailsWidgetFragment\n  __typename\n}\n\nfragment AccountBalanceFragment on BankAccount {\n  id\n  balance\n  balance_updated_at\n  balances {\n    display\n    __typename\n  }\n  active\n  __typename\n}\n\nfragment CreditDetailsWidgetFragment on User {\n  secured_credit_accounts: bank_accounts(filter: {account_type: \&quot;secured_credit\&quot;}) {\n    id\n    account_type\n    balances {\n      available\n      __typename\n    }\n    cards {\n      id\n      status_type\n      ...CreditCardActivationDetails\n      __typename\n    }\n    account_summary {\n      due_date\n      __typename\n    }\n    auto_payoff\n    credit_autoload_settings {\n      credit_autoload_enabled\n      credit_autoload_choices {\n        credit_autoload_funding_type\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  ...AutoloadAbilityFragment\n  __typename\n}\n\nfragment AutoloadAbilityFragment on User {\n  abilities {\n    credit {\n      see_autoload {\n        is_able\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment CreditCardActivationDetails on Card {\n  id\n  needs_activation\n  projected_arrival_date\n  __typename\n}\n\nfragment HomeListTopWidgetWrapper on User {\n  first_name\n  email\n  abilities {\n    referral_bonus {\n      see_widget {\n        is_able\n        __typename\n      }\n      __typename\n    }\n    overdraft {\n      tip {\n        create {\n          is_able\n          __typename\n        }\n        __typename\n      }\n      see_eligibility_widget {\n        is_able\n        __typename\n      }\n      see_ineligibility_widget {\n        is_able\n        __typename\n      }\n      see_35_dollar_promotion_widget {\n        is_able\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  user_settings {\n    credit_eligible\n    __typename\n  }\n  secured_credit_accounts: bank_accounts(filter: {account_type: \&quot;secured_credit\&quot;}) {\n    id\n    __typename\n  }\n  checking_accounts: bank_accounts(filter: {account_type: \&quot;checking\&quot;}) {\n    id\n    account_type\n    bank_name\n    overdraft {\n      spotted_amount\n      tip_config {\n        ui_text {\n          prompt {\n            title\n            body\n            __typename\n          }\n          disclaimer\n          tipped {\n            title\n            body\n            __typename\n          }\n          no_tip {\n            title\n            body\n            __typename\n          }\n          __typename\n        }\n        ui_version\n        mode\n        options {\n          amount\n          percent\n          __typename\n        }\n        __typename\n      }\n      widget_eligibility_text {\n        title\n        body\n        __typename\n      }\n      widget_ineligibility_text {\n        title\n        body\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  ...FirstDDFragment\n  __typename\n}\n\nfragment FirstDDFragment on User {\n  direct_deposit {\n    first_received_at\n    first_deposit_amount\n    __typename\n  }\n  __typename\n}\n\nfragment UnreadMessagesFragment on Query {\n  chatbot {\n    unread_message\n    __typename\n  }\n  __typename\n}\n\nfragment DialogWrapperFragment on User {\n  ...HighYieldSavingsAccountFragment\n  __typename\n}\n\nfragment HighYieldSavingsAccountFragment on User {\n  savings_accounts: bank_accounts(filter: {account_type: \&quot;savings\&quot;}) {\n    id\n    is_high_yield_savings\n    __typename\n  }\n  __typename\n}\n\nfragment DialogWrapperSavingsConfigFragment on SavingsConfig {\n  migration_dialog_copy {\n    title\n    body\n    __typename\n  }\n  share_copy {\n    title\n    body\n    __typename\n  }\n  __typename\n}\n\nfragment HighYieldSavingsWidgetFragment on SavingsConfig {\n  ...HighYieldSavingsApyFragment\n  apy_disclosure\n  savings_enrollment_widget_copy\n  __typename\n}\n\nfragment HighYieldSavingsApyFragment on SavingsConfig {\n  apy\n  high_yield_savings_enabled\n  __typename\n}\n\nfragment ClickSwitchEligibilityFragment on Query {\n  direct_deposit_switcher {\n    user {\n      id\n      feature_variant\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n&quot;,&#xd;
+  &quot;variables&quot;: {&#xd;
+    &quot;withAccountDetails&quot;: false&#xd;
+  }&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${api_host}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">${api_protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+            <stringProp name="HTTPSampler.path">/graphql</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">auth-token</stringProp>
+                  <stringProp name="Header.value">${auth_token}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="HomeMasterQuery Assertion" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+
+def failureMessage = &apos;&apos;
+def jsonResponse = null
+JsonSlurper JSON = new JsonSlurper()
+
+try {
+	jsonResponse = JSON.parseText(prev.getResponseDataAsString())
+} catch (Exception e) {
+	failureMessage += &apos;Invalid JSON.\n&apos;
+}
+
+if (!&quot;200&quot;.equals(prev.getResponseCode())) {
+	failureMessage += &apos;Response code = &apos; + prev.getResponseCode() + &apos;.\n&apos;
+}
+
+if (!jsonResponse.data) {
+	failureMessage += &apos;$.data = &apos; + jsonResponse.data + &quot;.\n&quot; 
+} else if (!jsonResponse.data.user) {
+	failureMessage += &apos;$.data.user = &apos; + jsonResponse.data.user + &quot;.\n&quot; 	
+} else if (!jsonResponse.data.user.first_name) {
+	failureMessage += &apos;$.data.user.first_name = &apos; + jsonResponse.data.user.first_name + &quot;.\n&quot; 
+}
+
+if (failureMessage?.trim()) {
+	AssertionResult.setFailureMessage(failureMessage)
+	AssertionResult.setFailure(true)
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  client:
+    image: justb4/jmeter:5.1.1
+    command: client
+    tty: true
+    ports:
+      - "60000"
+    volumes:
+      - "./tests/:/tests/"
+    networks:
+      - jmeter
+  server:
+    image: justb4/jmeter:5.1.1
+    command: server
+    tty: true
+    ports:
+      - "50000"
+      - "1099"
+    volumes:
+      - "./tests/:/tests/"
+    networks:
+      - jmeter
+    depends_on:
+      - client
+
+networks:
+  jmeter:
